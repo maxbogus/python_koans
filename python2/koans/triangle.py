@@ -18,12 +18,24 @@
 #   about_triangle_project_2.py
 #
 def triangle(a, b, c):
-    if (a == b and b == c and c == a):
-        return 'equilateral'
-    elif (a != b and b != c and c != a):
-        return 'scalene'
-    else:
-        return 'isosceles'
+    try:    
+        if (a == b and b == c and c == a):
+            if (a == 0 or b == 0 or c == 0):
+                raise TriangleError('Message')            
+            else:
+                return 'equilateral'
+        elif (a != b and b != c and c != a):
+            if (a < 0 or b < 0 or c < 0):
+                raise TriangleError('Message')
+            else:
+                return 'scalene'
+        else:
+            if (a + b > c and a + c > b and b + c > a):
+                return 'isosceles'
+            else:
+                raise TriangleError('Message')
+    except ValueError as e:
+        print 'we will not catch e'
 
 # Error class used in part 2.  No need to change this code.
 class TriangleError(StandardError):
